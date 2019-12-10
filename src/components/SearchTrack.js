@@ -56,7 +56,7 @@ export default function SearchTrack({user}){
             <form onSubmit={e => handleSubmit(e)} className="search-form">
                 <input className="form-control" type="text" name="search" ref={searchStr} placeholder="Search a song..."/>
                 <span className="bar"></span>
-                <input type="submit" style={{display:"none"}} />
+                <input type="submit"  />
             </form>
             {finishSearching &&searchResult&&<span className="search-musicPlayer" >
                 <img className="songImg" src={searchResult.album.cover_medium} />

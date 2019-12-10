@@ -8,7 +8,7 @@ export default function NavBar({ loggedin, logoutFunction, user, app }) {
     // console.log(currentUser)
     useEffect(()=>{
         user.uid && queryUser(user.uid)
-    },[user])
+    }, [user, username])
     
     const queryUser = (uid)=>{
         axios.get(`http://localhost:8888/user?query=${uid}`)

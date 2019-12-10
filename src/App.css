@@ -361,11 +361,22 @@ p{
   position: absolute;
 }
 
-.search-form .form-control{
-  background: url('https://img.icons8.com/material-outlined/24/ffffff/search.png');
+.search-form input[type="submit"]{
+  position: relative;
+    top: -30px;
+    left: 160px;
+background: url('https://img.icons8.com/material-outlined/24/ffffff/search.png');
   background-repeat: no-repeat;
-  background-position-x: right;
-  background-position-y: bottom;
+  background-position: center;
+  width: 30px;
+  height: 30px;
+  color: transparent;
+  border: none;
+  outline: none;
+}
+
+.search-form input[type="submit"]:hover{
+  border: 1px solid white;
 }
 
 .search-form .form-control::placeholder{
@@ -836,6 +847,10 @@ button[editext="save-button"],button[editext="cancel-button"] {
 
 .user-email{
   margin-right: 30px;
+}
+
+button,input{
+  outline: none;
 }
 
 .footer{
