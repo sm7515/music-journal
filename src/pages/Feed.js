@@ -1,13 +1,13 @@
 import React from 'react';
-import GetTrack from '../components/GetTrack';
-import axios from 'axios';
+import SearchTrack from '../components/SearchTrack';
+import DisplayFeed from "../components/DisplayFeed";
 
-export default function Feed() {
-    
+export default function Feed({ user}) {
+    // console.log(user)
     return(
-        <div>
-        this is feed page
-        <GetTrack />
-        </div>
+        <div className="feed-page">
+            <SearchTrack user={user}/>
+            <DisplayFeed />
+        </div> 
     )
 }
