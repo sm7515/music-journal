@@ -12,7 +12,7 @@ export default function DisplayFeed({user}) {
     const uid=user.uid;
 
     const getAllPost=()=>{
-        axios.get(`http://localhost:8888/getpost`)
+        axios.get(`https://musicjournal-api.herokuapp.com/getpost`)
         .then(res=>{
             // console.log(res.data);
             if(doneQuery!=true){
@@ -75,7 +75,7 @@ export default function DisplayFeed({user}) {
     }, [doneQuery])
 
     const addLike=(uid,trackId,key)=>{
-        axios.post(`http://localhost:8888/addLike`,{
+        axios.post(`https://musicjournal-api.herokuapp.com/addLike`,{
             uid:uid,
             trackId: trackId
         })

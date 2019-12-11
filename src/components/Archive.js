@@ -13,7 +13,7 @@ export default function Archive({user}) {
     let [username, setUsername] = useState("");
 
     const queryUserprofile = (uid) => {
-        axios.get(`http://localhost:8888/user?query=${uid}`)
+        axios.get(`https://musicjournal-api.herokuapp.com/user?query=${uid}`)
         .then(res => {
             // console.log(res)
             setUsername(res.data.username)
@@ -26,7 +26,7 @@ export default function Archive({user}) {
 
     const queryUserPost=(uid)=>{
         console.log(uid)
-        uid&& axios.get(`http://localhost:8888/user/getAllPosts?query=${uid}`)
+        uid && axios.get(`https://musicjournal-api.herokuapp.com/user/getAllPosts?query=${uid}`)
             .then(res=>{
                 // console.log(res)
                 posts = [];
@@ -96,7 +96,7 @@ export default function Archive({user}) {
     const deletePost = (uid, item)=>{
         let trackId = item&&item.track.id;
         console.log(trackId)
-        axios.post(`http://localhost:8888/deletePost`,{
+        axios.post(`https://musicjournal-api.herokuapp.com/deletePost`,{
             uid:uid,
             trackId: trackId
         })

@@ -8,7 +8,7 @@ export default function UserProfileNavBar({user}) {
     let [profileimage,setProfileImage]=useState('');
 
     const queryUserprofile = (uid) => {
-        uid&&axios.get(`http://localhost:8888/user?query=${uid}`)
+        uid && axios.get(`https://musicjournal-api.herokuapp.com/user?query=${uid}`)
         .then(res => {
             // console.log(res)
             setUsername(res.data.username)

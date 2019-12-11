@@ -80,7 +80,7 @@ export default function MakePost({ track, user}) {
     const handleOnSubmit=(e)=>{
         e.preventDefault();
         // console.log(e.currentTarget.thoughts.value)
-        axios.post(`http://localhost:8888/makepost`, {
+        axios.post(`https://musicjournal-api.herokuapp.com/makepost`, {
             user: user,
             postContent: e.currentTarget.thoughts.value,
             track: track

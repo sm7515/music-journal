@@ -23,7 +23,7 @@ export default function SearchTrack({user}){
 
     function getRandomTrack() {
         randomId = generateRandomTrackId();
-        axios.get(`http://localhost:8888/search/random?query=${randomId}`)
+        axios.get(`https://musicjournal-api.herokuapp.com/search/random?query=${randomId}`)
             .then(res => {
                 // const result = res.data.data;
                 console.log(res)
@@ -43,7 +43,7 @@ export default function SearchTrack({user}){
     }
 
     function handleSearch(searchInput) {
-        axios.get(`http://localhost:8888/search?query=${searchInput}`)
+        axios.get(`https://musicjournal-api.herokuapp.com/search?query=${searchInput}`)
             .then(res=>{
                 if(res.data.data.length===0){
                     setError("Sorry, we didn't find the song you're looking for.");

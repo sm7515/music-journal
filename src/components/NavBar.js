@@ -11,11 +11,11 @@ export default function NavBar({ loggedin, logoutFunction, user, app }) {
     }, [user, username])
     
     const queryUser = (uid)=>{
-        axios.get(`http://localhost:8888/user?query=${uid}`)
+        axios.get(`https://musicjournal-api.herokuapp.com/user?query=${uid}`)
             .then(res=>{
                 // console.log(res)
                 if (res.data ==="No such user!"){
-                    axios.post(`http://localhost:8888/user`, {
+                    axios.post(`https://musicjournal-api.herokuapp.com/user`, {
                         uid: currentUser.uid,
                         email: currentUser.email
                     })

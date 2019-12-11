@@ -12,7 +12,8 @@ export default function Account({ user, app}) {
     let [src,setSrc]=useState("");
     let [profileimage, setProfileImage]=useState("")
 
-    const queryUserprofile=(uid)=>{axios.get(`http://localhost:8888/user?query=${uid}`)
+    const queryUserprofile = (uid) => {
+        axios.get(`https://musicjournal-api.herokuapp.com/user?query=${uid}`)
         .then(res => {
             // console.log(res)
             setUsername(res.data.username)
@@ -35,7 +36,7 @@ export default function Account({ user, app}) {
     // console.log(app.firebase_&&app.firebase_.auth().currentUser)
     const onSave=(val)=>{
         console.log(val);
-        axios.post(`http://localhost:8888/user/username`, {
+        axios.post(`https://musicjournal-api.herokuapp.com/user/username`, {
             uid: uid,
             username: val,
         })
@@ -67,7 +68,7 @@ export default function Account({ user, app}) {
 
     const onClick=()=>{
         // console.log(preview);
-        preview&&axios.post(`http://localhost:8888/user/profileimage`,{
+        preview && axios.post(`https://musicjournal-api.herokuapp.com/user/profileimage`,{
             uid:uid,
             profileimage:preview,
         })

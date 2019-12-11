@@ -26,7 +26,7 @@ export default function Users() {
     },[posts])
 
     const queryUserprofile = (uid) => {
-        axios.get(`http://localhost:8888/user?query=${uid}`)
+        axios.get(`https://musicjournal-api.herokuapp.com/user?query=${uid}`)
             .then(res => {
                 // console.log(res)
                 setUsername(res.data.username)
@@ -39,7 +39,7 @@ export default function Users() {
 
     const queryUserPost = (uid) => {
         console.log(uid)
-        uid && axios.get(`http://localhost:8888/user/getAllPosts?query=${uid}`)
+        uid && axios.get(`https://musicjournal-api.herokuapp.com/user/getAllPosts?query=${uid}`)
             .then(res => {
                 // console.log(res)
                 posts = [];
@@ -91,7 +91,7 @@ export default function Users() {
     }
 
     const addLike = (uid, trackId, key) => {
-        axios.post(`http://localhost:8888/addLike`, {
+        axios.post(`https://musicjournal-api.herokuapp.com/addLike`, {
             uid: uid,
             trackId: trackId
         })

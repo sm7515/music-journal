@@ -89,7 +89,7 @@ function App() {
       .then((response) => {
         // console.log(response.user);
         setLoggedIn(true);
-        axios.post(`http://localhost:8888/user`, {
+        axios.post(`https://musicjournal-api.herokuapp.com/user`, {
           uid: response.user.uid,
           email: response.user.email
         })
