@@ -47,7 +47,8 @@ router.post('/', (req, res) => {
             user: { uid:uid,email: userEmail, username: userName, profileimage: profileimage },
             postContent: postContent,
             track: track,
-            postDate: date
+            postDate: date,
+            likes:0
         })
             .then(() => {
                 console.log("post success!")
@@ -61,7 +62,8 @@ router.post('/', (req, res) => {
     let newPost={
         postContent: postContent,
         track: track,
-        postDate: date
+        postDate: date,
+        likes:0
     }
     let allPosts=[];
     db.collection("users").doc(uid).get()
@@ -87,3 +89,4 @@ router.post('/', (req, res) => {
 
 module.exports = router;
 module.exports.firebaseapp = firebaseapp;
+module.exports.firebase = firebase;

@@ -10,6 +10,7 @@ const makePostRoute = require('./routes/makepPost')
 const getPostRoute = require('./routes/getPost')
 const userRoute =require('./routes/user')
 const deletePostRoute=require('./routes/deletePost')
+const addLikeRoute=require('./routes/addLike')
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use("/makepost", makePostRoute);
 app.use("/getpost", getPostRoute);
 app.use("/user",userRoute);
 app.use("/deletePost", deletePostRoute);
+app.use("/addLike", addLikeRoute);
 
 app.listen(port, () => {
     console.log(`server running on ${port}`);

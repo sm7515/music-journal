@@ -137,6 +137,10 @@ export default function Archive({user}) {
                                     controls />
                             </span>
                         </span>
+                        <span className="like-section">
+                            <span className="like">like</span>
+                            <span className="like-num"  >{item.likes}</span>
+                        </span>
                         <div className="line"></div> 
                     </div>
                 )

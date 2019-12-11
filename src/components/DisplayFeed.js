@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect,createRef} from "react";
 import axios from 'axios';
 import ReactAudioPlayer from 'react-audio-player';
 
@@ -7,6 +7,8 @@ export default function DisplayFeed({user}) {
     let [allPosts,setAllPosts]=useState([]);
     const [doneQuery,setDoneQuery]=useState(false);
     const [doneUpdate,setDoneUpdate]=useState(false);
+    let posts=new Map();
+
     const uid=user.uid;
 
     const getAllPost=()=>{
@@ -72,13 +74,22 @@ export default function DisplayFeed({user}) {
         // console.log(doneQuery)
     }, [doneQuery])
 
+    const addLike=(uid,trackId,key)=>{
+        axios.post(`http://localhost:8888/addLike`,{
+            uid:uid,
+            trackId: trackId
+        })
+        let val=parseInt(posts.get(key).value,10);
+        val+=1;
+        posts.get(key).value=val;
+    }
 
     return(
         <div className="feed-section">
-            <button onClick={refreshPage}>refresh</button>
+            <button className="refresh" onClick={refreshPage}>refresh</button>
         {
             doneUpdate && allPosts.map((item,key)=>(
-                <div key={key} className="individual-post">
+                <div key={key} className="individual-post" >
                     <span className="user-info">
                         <img src={item.user.profileimage} />
                     </span>
@@ -103,6 +114,10 @@ export default function DisplayFeed({user}) {
                                     src={item.track.preview}
                                     controls />
                             </span>
+                        </span>
+                        <span className="like-section">
+                            <button className="like" onClick={() => { addLike(item.user.uid, item.track.id,key) }}>like</button>
+                            <input className="like-num" type='number' value={posts.get(key) ? posts.get(key).value: item.likes} readOnly ref={eachpost => posts.set(key, eachpost)}></input>
                         </span>
                         <div className="line"></div> 
                     </span> 

@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,createRef} from 'react';
 import axios from 'axios';
 import ReactAudioPlayer from 'react-audio-player';
 
@@ -12,6 +12,7 @@ export default function Users() {
     let [done, setDone] = useState(false);
     let [posts, setPosts] = useState([]);
     let [newPosts, setNewPosts] = useState([]);
+    let userposts = new Map();
     // console.log(uid)
 
     useEffect(()=>{
@@ -89,6 +90,15 @@ export default function Users() {
         return time;
     }
 
+    const addLike = (uid, trackId, key) => {
+        axios.post(`http://localhost:8888/addLike`, {
+            uid: uid,
+            trackId: trackId
+        })
+        let val = parseInt(userposts.get(key).value, 10);
+        val += 1;
+        userposts.get(key).value = val;
+    }
 
     return (
         <div className="others-page">
@@ -116,6 +126,10 @@ export default function Users() {
                                     src={item.track.preview}
                                     controls />
                             </span>
+                        </span>
+                        <span className="like-section">
+                            <button className="like" onClick={() => { addLike(uid, item.track.id, index) }}>like</button>
+                            <input className="like-num" type='number' value={userposts.get(index) ? userposts.get(index).value : item.likes} readOnly ref={eachpost => userposts.set(index, eachpost)}></input>
                         </span>
                         <div className="line"></div>
                     </div>

@@ -487,7 +487,7 @@ background: url('https://img.icons8.com/material-outlined/24/ffffff/search.png')
   margin-bottom: 100px;
 }
 
-.feed-section button{
+.feed-section .refresh{
   background: url("https://img.icons8.com/material-outlined/24/ffffff/reboot.png");
   border: none;
   background-repeat: no-repeat;
@@ -499,7 +499,7 @@ background: url('https://img.icons8.com/material-outlined/24/ffffff/search.png')
   left: 700px;
 }
 
-.feed-section button:hover{
+.feed-section .refresh:hover{
   transform: rotate(180deg);
   transition: ease 1s;
 }
@@ -983,6 +983,66 @@ textarea::placeholder{
 
 .others-page .others-posts .individual-post{
   position: relative;
+}
+
+.like-section{
+  margin-top: 10px;
+  position: absolute;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  left: 100%;
+}
+
+.others-page .like-section{
+  position: relative;
+  left: 90%;
+  bottom: -30px;
+}
+
+.archive-page .like-section{
+  position: relative;
+  left: 90%;
+  bottom: -30px;
+}
+
+.like{
+  background: url("https://img.icons8.com/material/24/ffffff/filled-like--v1.png");
+  background-repeat: no-repeat;
+  border:none;
+  background-position: center;
+  width: 30px;
+  height: 30px;
+  color: transparent;
+}
+
+.like:hover{
+  background: url("https://img.icons8.com/material/24/FF3232/filled-like--v1.png");
+  background-repeat: no-repeat;
+  border:none;
+  background-position: center;
+  width: 30px;
+  height: 30px;
+  color: transparent;
+}
+.like:active{
+  background: url("https://img.icons8.com/material/30/FF3232/filled-like--v1.png");
+  background-repeat: no-repeat;
+  border:none;
+  background-position: center;
+  width: 30px;
+  height: 30px;
+  color: transparent;
+  transition: 0.2s ease all;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.like-num{
+  border:none;
+  background:none;
+  color: white;
+  font-size: 16px;
 }
 
 .footer{
