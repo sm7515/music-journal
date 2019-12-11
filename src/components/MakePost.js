@@ -106,7 +106,7 @@ export default function MakePost({ track, user}) {
                 </span>
             </span>
             <form onSubmit={e => handleOnSubmit(e)} >
-                <textarea name="thoughts" className="post-content"></textarea>
+                <textarea name="thoughts" className="post-content" placeholder="make a post..."></textarea>
                 <input type="submit" ></input>
             </form>
         </div>

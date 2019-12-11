@@ -27,6 +27,7 @@ router.post('/',(req,res)=>{
             email: req.body.email,
             username: username,
             creationTime: new Date(),
+            posts:[],
             profileimage: "https://img.icons8.com/material/96/ffffff/user-male-circle--v1.png"
         })
             .then(() => {
@@ -87,7 +88,7 @@ router.post('/username',(req,res)=>{
 router.post('/profileimage', (req, res) => {
     const uid = req.body.uid;
     const profileimage = req.body.profileimage;
-    console.log(uid)
+    // console.log(uid)
     let docId=[];
     let username=[]
     // console.log(req);
@@ -154,13 +155,13 @@ router.get('/',(req,res)=>{
 })
 
 router.get('/getAllPosts', (req, res) => {
-    console.log(req.query.query);
+    // console.log(req.query.query);
     const uid = req.query.query;
     uid && db.collection("users").doc(uid).get()
         .then(doc => {
             if (doc.exists) {
                 // console.log("Document data:", doc.data());
-                res.send(doc.data().posts);
+                res.send(doc.data().posts.reverse());
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such user!");

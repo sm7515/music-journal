@@ -7,7 +7,7 @@ export default function Feed({ user}) {
     return(
         <div className="feed-page">
             <SearchTrack user={user}/>
-            <DisplayFeed />
+            <DisplayFeed user={user}/>
         </div> 
     )
 }

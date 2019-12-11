@@ -149,7 +149,6 @@ input:invalid:not(:placeholder-shown) ~ .bar:after {
   border-style: none;
   text-align: center;
   font-size: 22px;
-  text-shadow: 0 0 1.5px #1DB954;
   padding: 15px 50px;
   outline: none;
 }
@@ -177,7 +176,6 @@ input:invalid:not(:placeholder-shown) ~ .bar:after {
   color: white;
   letter-spacing: 3px;
   background-color: #1DB954;
-  text-shadow: 0 0 1.5px white;
   border-style: none;
   text-align: center;
   font-size: 22px;
@@ -270,8 +268,13 @@ p{
 
 .google-btn{
   position: absolute;
-    bottom: 250px;
-    left: 600px;
+  left: 45%;
+  top: 55%;
+  transform: translateX(-20%);
+}
+
+.signup .google-btn{
+  top: 60%;
 }
 
 .navbar{
@@ -386,8 +389,8 @@ background: url('https://img.icons8.com/material-outlined/24/ffffff/search.png')
 
 .search-error{
   position: absolute;
-  top: 60px;
-  left: -20px;
+  top: 150px;
+  width: 400px;
 }
 
 .musicPlayer, .musicPlayer-nocontent{
@@ -522,7 +525,7 @@ background: url('https://img.icons8.com/material-outlined/24/ffffff/search.png')
   padding-bottom: 50px;
 }
 
-.post-info .line{
+.post-info .line, .archive-page .line,.others-page .line{
     width: 720px;
     left:-120px;
   height: 1px;
@@ -543,9 +546,15 @@ background: url('https://img.icons8.com/material-outlined/24/ffffff/search.png')
   align-items: flex-start;
 }
 
-.name-date .name{
+.name-date .name a{
   font-weight: bold;
   font-size: medium;
+  color: white;
+  text-decoration: none;
+}
+
+.name-date .name a:hover{
+  text-decoration: underline;
 }
 
 .name-date .postDate{
@@ -560,19 +569,19 @@ background: url('https://img.icons8.com/material-outlined/24/ffffff/search.png')
 }
 
 .musicPlayer-nocontent{
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
-.post-info .songImg{
-  width: 110px;
+.post-info .songImg,.archive-page .songImg,.others-page .songImg{
+  width: 130px;
 }
 
-.post-info .songInfo{
+.post-info .songInfo,.archive-page .songInfo,.others-page .songInfo{
   height: 110px;
-  padding: 0 80px;
+  padding: 10px 60px;
 }
 
-.post-info  .postContent{
+.post-info  .postContent,.archive-page .postContent, .others-page .postContent{
   margin: 20px 0;
   max-width: 500px;
   display: flex;
@@ -581,18 +590,18 @@ background: url('https://img.icons8.com/material-outlined/24/ffffff/search.png')
   align-items: baseline;
 }
 
-.post-info  .postContent .text{
+.post-info  .postContent .text,.archive-page .postContent .text,.others-page .postContent .text{
   padding:0 30px;
   display: block;
   text-align: justify;
 }
 
-.post-info .postContent .qoute-before,.post-info .postContent .qoute-after{
+.post-info .postContent .qoute-before,.post-info .postContent .qoute-after,.archive-page .postContent .qoute-before,.archive-page .postContent .qoute-after,.others-page .postContent .qoute-after,.others-page .postContent .qoute-before{
   font-size: 30px;
   font-family: 'Anton', sans-serif;
 }
 
-.post-info .audio{
+.post-info .audio, .archive-page .audio,.others-page .audio{
   height: 20px;
   width: 300px;
 }
@@ -697,7 +706,7 @@ background: url('https://img.icons8.com/material-outlined/24/ffffff/search.png')
   background-color: #282828;
 }
 
-.use-account-page{
+.use-account-page,.use-archive-page{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -849,8 +858,131 @@ button[editext="save-button"],button[editext="cancel-button"] {
   margin-right: 30px;
 }
 
+.archive-page{
+  color:white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 150px;
+  margin-bottom: 150px;
+  margin-left: 600px;
+}
+
+.archive-page .individual-post,.others-page .others-posts .individual-post{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 600px;
+  padding-left: 100px;
+  padding-right: 10px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.archive-page button{
+  display: none;
+  position: absolute;
+  right: 50px;
+  background: url("https://img.icons8.com/material/24/ffffff/filled-trash.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  border:none;
+  width: 30px;
+  height: 30px;
+  color: transparent;
+}
+
+.archive-page .individual-post:hover > button{
+  display:block;
+}
+
+.archive-page button:hover{
+  border: 1px solid white;
+}
+
+.archive-page .musicPlayer, .others-page .others-posts .individual-post .musicPlayer{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  border: 1px solid white;
+  width: 500px;
+}
+
+.archive-page .line, .others-page .line{
+  bottom: 0;
+  left: 10px;
+  width: 690px;
+}
+
 button,input{
   outline: none;
+}
+
+textarea::placeholder{
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+}
+
+.others-page{
+  position: absolute;
+  padding:20px 20px;
+  top: 15%;
+  transform: translateX(20%);
+  display: flex;
+  flex-direction: row;
+  color: white;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.others-page .others-profile{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 100px;
+  padding-top: 50px;
+}
+
+.others-page .others-profile img{
+  margin-bottom: 30px;
+  width: 180px;
+}
+
+.others-page .others-profile span{
+  font-weight: bold;
+  font-size: 22px;
+  letter-spacing: 2px;
+}
+
+.others-page .others-profile span::before{
+  content: "USER";
+  display: block;
+  font-size: 16px;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  text-align: center;
+  font-weight: lighter;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 5px;
+}
+
+.others-page .others-posts{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+.others-page .others-posts .individual-post{
+  position: relative;
 }
 
 .footer{

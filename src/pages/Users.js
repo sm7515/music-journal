@@ -1,44 +1,56 @@
-import React, { useState, useEffect } from 'react';
+import React,{useState,useEffect} from 'react';
 import axios from 'axios';
 import ReactAudioPlayer from 'react-audio-player';
 
-export default function Archive({user}) {
-
-    let [uid, setUid] = useState("");
-    let [posts,setPosts]=useState([]);
-    let [newPosts,setNewPosts]=useState([]);
-    let [done,setDone]=useState(false);
-    let [update,setUpdate]=useState(false);
+export default function Users() {
+    // console.log(window.location.pathname)
+    let pathname = window.location.pathname.split('/');
+    let uid = (pathname[2]);
     let [profileimage, setProfileImage] = useState("")
     let [username, setUsername] = useState("");
+    let [update, setUpdate] = useState(false);
+    let [done, setDone] = useState(false);
+    let [posts, setPosts] = useState([]);
+    let [newPosts, setNewPosts] = useState([]);
+    // console.log(uid)
+
+    useEffect(()=>{
+        queryUserprofile(uid);
+        queryUserPost(uid);
+    },[uid])
+
+    useEffect(()=>{
+        posts && handleAllPosts(posts)
+        console.log(newPosts)
+    },[posts])
 
     const queryUserprofile = (uid) => {
         axios.get(`http://localhost:8888/user?query=${uid}`)
-        .then(res => {
-            // console.log(res)
-            setUsername(res.data.username)
-            setProfileImage(res.data.profileimage);
-        })
-        .catch(err => {
-            console.log(err)
-        })
+            .then(res => {
+                // console.log(res)
+                setUsername(res.data.username)
+                setProfileImage(res.data.profileimage);
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
-    const queryUserPost=(uid)=>{
+    const queryUserPost = (uid) => {
         console.log(uid)
-        uid&& axios.get(`http://localhost:8888/user/getAllPosts?query=${uid}`)
-            .then(res=>{
+        uid && axios.get(`http://localhost:8888/user/getAllPosts?query=${uid}`)
+            .then(res => {
                 // console.log(res)
                 posts = [];
                 setPosts(posts);
-                let data=res.data;
-                for(let i=0;i<data.length;i++){
+                let data = res.data;
+                for (let i = 0; i < data.length; i++) {
                     posts.push(data[i]);
                 }
                 setPosts(posts);
                 setDone(true);
             })
-            .catch(err=>{
+            .catch(err => {
                 console.log(err)
             })
     }
@@ -77,49 +89,17 @@ export default function Archive({user}) {
         return time;
     }
 
-    useEffect(() => {
-        setUid(user.uid)
-    }, [user])
-
-    useEffect(() => {
-        uid && queryUserprofile(uid);
-        uid && queryUserPost(uid);
-    }, [uid])
-
-    useEffect(()=>{
-        posts&&handleAllPosts(posts)
-        console.log(newPosts)
-    },[posts])
-
-    let pathName = window.location.pathname;
-
-    const deletePost = (uid, item)=>{
-        let trackId = item&&item.track.id;
-        console.log(trackId)
-        axios.post(`http://localhost:8888/deletePost`,{
-            uid:uid,
-            trackId: trackId
-        })
-            .then(res=>console.log(res))
-            .catch(err=>console.log(err))
-        setTimeout(function () {
-            window.location.reload(true);
-        }, 500);
-    }
 
     return (
-        <div className="use-archive-page">
-            <div className="profile-nav">
+        <div className="others-page">
+            <div className="others-profile">
                 {profileimage && <img src={profileimage} alt="profileimage" />}
                 <span>{username}</span>
-                <a href="/userprofile/account" className={pathName === "/userprofile/account" ? "account-nav" : ""}>account</a>
-                <a href="/userprofile/archive" className={pathName === "/userprofile/archive" ? "archive-nav" : ""}>archive</a>
             </div>
-            <div className="archive-page">
-                {done&&newPosts.length!==0?newPosts.map((item,index)=>
+            <div className="others-posts">
+                {done && newPosts.length !== 0 ? newPosts.map((item, index) =>
                     <div key={index} className="individual-post">
                         <span className="postDate">{item.postDate}</span>
-                        <button onClick={() => deletePost(uid, item)}>delete</button>
                         {item.postContent != "" &&
                             <span className="postContent">
                                 <span className="qoute-before">“</span>
@@ -137,10 +117,10 @@ export default function Archive({user}) {
                                     controls />
                             </span>
                         </span>
-                        <div className="line"></div> 
+                        <div className="line"></div>
                     </div>
                 )
-                    : <span>You have not post anything yet.</span>
+                    : <span>This user has not post anything yet.</span>
                 }
             </div>
         </div>

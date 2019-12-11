@@ -11,13 +11,48 @@ export default function SearchTrack({user}){
     let [finishSearching,setFinishSearching]=useState(false);
     let [selected, setSelected]=useState(false);
     let [error,setError]=useState("");
+    let randomId=0;
+    let [random,setRandom]=useState(false);
+    let [randomResult,setRandomResult]=useState({});
+
+    function generateRandomTrackId(){
+        randomId=Math.floor(Math.random() * 8999999 + 1000000);
+        console.log(randomId);
+        return randomId;
+    }
+
+    function getRandomTrack() {
+        randomId = generateRandomTrackId();
+        axios.get(`http://localhost:8888/search/random?query=${randomId}`)
+            .then(res => {
+                // const result = res.data.data;
+                console.log(res)
+
+                if (res.data.error){
+                    setError("Sorry, no random song for you today. Search a song please.");
+                }
+                else{
+                    setRandomResult(res.data);
+                    setRandom(true);
+                }
+            })
+            .catch(err => {
+                // console.log(err.response.data);
+                setError("Sorry, no random song for you today.Search a song please.");
+            })
+    }
 
     function handleSearch(searchInput) {
         axios.get(`http://localhost:8888/search?query=${searchInput}`)
             .then(res=>{
-                const result = res.data.data;
-                setSearchResult(result[0])
-                setFinishSearching(true);
+                if(res.data.data.length===0){
+                    setError("Sorry, we didn't find the song you're looking for.");
+                }
+                else{
+                    const result = res.data.data;
+                    setSearchResult(result[0])
+                    setFinishSearching(true);
+                }
             })
             .catch(err=>{
                 console.log(err.response.data);
@@ -34,6 +69,16 @@ export default function SearchTrack({user}){
     // const handleOnClick=()=>{
     //     setSelected(true);
     // }
+
+    useEffect(()=>{
+        error = ""
+        setError(error)
+        if(!random){
+            randomResult=""
+            setRandomResult(randomResult)
+            getRandomTrack();
+        }
+    }, [random])
 
     useEffect(() => {
         error=""
@@ -58,7 +103,8 @@ export default function SearchTrack({user}){
                 <span className="bar"></span>
                 <input type="submit"  />
             </form>
-            {finishSearching &&searchResult&&<span className="search-musicPlayer" >
+            {finishSearching &&searchResult&&
+                <span className="search-musicPlayer" >
                 <img className="songImg" src={searchResult.album.cover_medium} />
                 <span className="songInfo">
                     <span className="songTitle">{searchResult.title}</span>
@@ -73,7 +119,24 @@ export default function SearchTrack({user}){
                 error && <span className="search-error">{error}</span>
             }
             {
-                <MakePost track={searchResult} user={user}/>
+                finishSearching && searchResult && <MakePost track={searchResult} user={user}/>
+            }
+            {
+                !error&&random && randomResult.album&& !finishSearching&&
+                <span className="search-musicPlayer" >
+                    <img className="songImg" src={randomResult.album.cover_medium} />
+                    <span className="songInfo">
+                        <span className="songTitle">{randomResult.title}</span>
+                        <span className="singerName">{randomResult.artist.name}</span>
+                        <ReactAudioPlayer
+                            className="audio"
+                            src={randomResult.preview}
+                            controls />
+                    </span>
+                </span>
+            }
+            {
+                !error &&random && !finishSearching && <MakePost track={randomResult} user={user} />
             }
         </div>
     )

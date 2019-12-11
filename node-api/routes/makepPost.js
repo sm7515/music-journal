@@ -14,6 +14,7 @@ const firebaseConfig = {
 };
 const firebaseapp = firebase.initializeApp(firebaseConfig);
 const db = firebaseapp.firestore();
+let admin = require('firebase-admin');
 
 router.post('/', (req, res) => {
     const date = new Date();
@@ -42,7 +43,7 @@ router.post('/', (req, res) => {
         })
     
     setTimeout(() => {
-        db.collection("music-posts").doc().set({
+        db.collection("music-posts").doc(track.id.toString(10)).set({
             user: { uid:uid,email: userEmail, username: userName, profileimage: profileimage },
             postContent: postContent,
             track: track,
@@ -50,26 +51,37 @@ router.post('/', (req, res) => {
         })
             .then(() => {
                 console.log("post success!")
-                res.send("success");
+                res.status(200).send("success");
             })
             .catch(function (error) {
                 console.log("post error:", error)
                 res.send("Error adding document: ", error);
             });
     }, 500);
-    db.collection("users").doc(uid).update({
-        posts: [{
-            postContent: postContent,
-            track: track,
-            postDate: date
-        }]
-    })
-        .then(() => {
-            console.log("update success!")
+    let newPost={
+        postContent: postContent,
+        track: track,
+        postDate: date
+    }
+    let allPosts=[];
+    db.collection("users").doc(uid).get()
+        .then(doc => {
+            allPosts=doc.data().posts;
+            allPosts.push(newPost);
         })
-        .catch(function (error) {
-            console.log("update error:", error)
-        });
+    
+    setTimeout(() => {
+        db.collection("users").doc(uid).update({
+            posts: allPosts
+        })
+            .then(() => {
+                console.log(allPosts.length)
+                console.log("update user post success!")
+            })
+            .catch(function (error) {
+                console.log("update user post error:", error)
+            });
+    }, 500);
 
 });
 

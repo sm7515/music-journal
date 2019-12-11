@@ -5,6 +5,7 @@ import axios  from 'axios';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import * as firebase from "firebase/app";
 import "firebase/auth";
+import './firebaseui-styling.global.css';
 
 import Login from './pages/Login'
 import Feed from './pages/Feed'
@@ -14,6 +15,7 @@ import Signup from './pages/Signup'
 import Account from './components/Account'
 import Archive from './components/Archive'
 import Footer from './components/Footer'
+import Users from './pages/Users'
 import './App.css';
 
 const firebaseConfig = {
@@ -166,6 +168,9 @@ function App() {
         </Route>
         <Route  exact  path='/userprofile/archive' >
           {loggedIn ? <Archive user={user}/> : <Redirect to="/login" />}
+        </Route>
+        <Route path='/users/' >
+          {loggedIn ? <Users /> : <Redirect to="/login" />}
         </Route>
         <Route path='/feed' >
           {loggedIn ? <Feed user={user}/> : <Redirect to="/login" />}

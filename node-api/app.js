@@ -9,6 +9,7 @@ const searchRoute =require('./routes/search')
 const makePostRoute = require('./routes/makepPost')
 const getPostRoute = require('./routes/getPost')
 const userRoute =require('./routes/user')
+const deletePostRoute=require('./routes/deletePost')
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use("/search",searchRoute);
 app.use("/makepost", makePostRoute);
 app.use("/getpost", getPostRoute);
 app.use("/user",userRoute);
+app.use("/deletePost", deletePostRoute);
 
 app.listen(port, () => {
     console.log(`server running on ${port}`);

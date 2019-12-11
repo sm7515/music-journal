@@ -2,11 +2,12 @@ import React,{useState,useEffect} from "react";
 import axios from 'axios';
 import ReactAudioPlayer from 'react-audio-player';
 
-export default function DisplayFeed() {
+export default function DisplayFeed({user}) {
 
     let [allPosts,setAllPosts]=useState([]);
     const [doneQuery,setDoneQuery]=useState(false);
     const [doneUpdate,setDoneUpdate]=useState(false);
+    const uid=user.uid;
 
     const getAllPost=()=>{
         axios.get(`http://localhost:8888/getpost`)
@@ -83,7 +84,7 @@ export default function DisplayFeed() {
                     </span>
                     <span className="post-info">
                         <span className="name-date">
-                            <span className="name">{item.user.username}</span>
+                            <span className="name"><a href={uid === item.user.uid ?`/userprofile/archive`: `/users/${item.user.uid}`}>{item.user.username}</a></span>
                             <span className="postDate">{item.postDate}</span>
                             {item.postContent!=""&&
                             <span className="postContent">
