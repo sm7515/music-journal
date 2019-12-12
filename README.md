@@ -12,6 +12,7 @@ I want to create a social media for people to share the music they like, comment
 * Users can
 	* Signup/Login/Logout
 	* Search for a song and make a post
+	* See history posts and delete a post
 	* View, comment and like other peoples' posts
 	* Upload profile image and change username
 	* Visit other peoples' account home page
