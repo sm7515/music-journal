@@ -167,7 +167,7 @@ function App() {
           {loggedIn ? <Account user={user} app={firebase.apps.length&&firebase.apps[0]}/> : <Redirect to="/login" />}
         </Route>
         <Route  exact  path='/userprofile/archive' >
-          {loggedIn ? <Archive user={user}/> : <Redirect to="/login" />}
+          {loggedIn ? <Archive user={user}/>  : <Redirect to="/login" />}
         </Route>
         <Route path='/users/' >
           {loggedIn ? <Users /> : <Redirect to="/login" />}

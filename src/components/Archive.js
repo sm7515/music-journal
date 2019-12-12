@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReactAudioPlayer from 'react-audio-player';
 
-export default function Archive({user}) {
+export default function Archive({ user}) {
 
     let [uid, setUid] = useState("");
     let [posts,setPosts]=useState([]);
@@ -140,6 +140,13 @@ export default function Archive({user}) {
                         <span className="like-section">
                             <span className="like">like</span>
                             <span className="like-num"  >{item.likes}</span>
+                        </span>
+                        <span className="comment-section">
+                            <span className="comment-section comments">
+                                {item.comments && item.comments.map((ele, num) => (
+                                    <span key={num} className="each-comment">{ele}</span>
+                                ))}
+                            </span>
                         </span>
                         <div className="line"></div> 
                     </div>

@@ -15,6 +15,9 @@ export default function NavBar({ loggedin, logoutFunction, user, app }) {
             .then(res=>{
                 // console.log(res)
                 if (res.data ==="No such user!"){
+                    currentUser.updateProfile({
+                        photoURL: "https://img.icons8.com/material/96/ffffff/user-male-circle--v1.png"
+                    })
                     axios.post(`https://musicjournal-api.herokuapp.com/user`, {
                         uid: currentUser.uid,
                         email: currentUser.email

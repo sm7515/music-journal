@@ -1,4 +1,4 @@
-import React,{useState,useEffect,createRef} from "react";
+import React,{useState,useEffect} from "react";
 import axios from 'axios';
 import ReactAudioPlayer from 'react-audio-player';
 
@@ -8,7 +8,6 @@ export default function DisplayFeed({user}) {
     const [doneQuery,setDoneQuery]=useState(false);
     const [doneUpdate,setDoneUpdate]=useState(false);
     let posts=new Map();
-
     const uid=user.uid;
 
     const getAllPost=()=>{
@@ -84,6 +83,20 @@ export default function DisplayFeed({user}) {
         posts.get(key).value=val;
     }
 
+    const handleCommentSubmit=(e,trackId,uid)=>{
+        e.preventDefault();
+        // console.log(e.target.comment.value)
+        let commentText = e.target.comment.value
+        commentText != "" && axios.post(`https://musicjournal-api.herokuapp.com/addComment`, {
+            uid: uid,
+            trackId: trackId,
+            comment: commentText
+        })
+        setTimeout(function () {
+            window.location.reload(true);
+        }, 200);
+    }
+
     return(
         <div className="feed-section">
             <button className="refresh" onClick={refreshPage}>refresh</button>
@@ -117,7 +130,18 @@ export default function DisplayFeed({user}) {
                         </span>
                         <span className="like-section">
                             <button className="like" onClick={() => { addLike(item.user.uid, item.track.id,key) }}>like</button>
-                            <input className="like-num" type='number' value={posts.get(key) ? posts.get(key).value: item.likes} readOnly ref={eachpost => posts.set(key, eachpost)}></input>
+                            <input className="like-num" type='number' value={posts.get(key) ? posts.get(key).value : item.likes} readOnly ref={eachpost => posts.set(key, eachpost)}></input>
+                        </span>
+                        <span className="comment-section">
+                            <span className="comment-section comments">
+                                {item.comments && item.comments.map((ele, num) => (
+                                    <span key={num} className="each-comment">{ele}</span>
+                                ))}
+                            </span>
+                            <form className='comment-section-form' onSubmit={(e) => handleCommentSubmit(e, item.track.id, item.user.uid)}>
+                                <input type='text' name="comment" placeholder="write comment..."/>
+                                <input type='submit' />
+                            </form>
                         </span>
                         <div className="line"></div> 
                     </span> 

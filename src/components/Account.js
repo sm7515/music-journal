@@ -68,6 +68,9 @@ export default function Account({ user, app}) {
 
     const onClick=()=>{
         // console.log(preview);
+        preview && currentUser.updateProfile({
+            photoURL: preview
+        })
         preview && axios.post(`https://musicjournal-api.herokuapp.com/user/profileimage`,{
             uid:uid,
             profileimage:preview,

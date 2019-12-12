@@ -131,6 +131,13 @@ export default function Users() {
                             <button className="like" onClick={() => { addLike(uid, item.track.id, index) }}>like</button>
                             <input className="like-num" type='number' value={userposts.get(index) ? userposts.get(index).value : item.likes} readOnly ref={eachpost => userposts.set(index, eachpost)}></input>
                         </span>
+                        <span className="comment-section">
+                            <span className="comment-section comments">
+                                {item.comments && item.comments.map((ele, num) => (
+                                    <span key={num} className="each-comment">{ele}</span>
+                                ))}
+                            </span>
+                        </span>
                         <div className="line"></div>
                     </div>
                 )

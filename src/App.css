@@ -606,6 +606,74 @@ background: url('https://img.icons8.com/material-outlined/24/ffffff/search.png')
   width: 300px;
 }
 
+.post-info .comment-section,.others-posts .comment-section{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 10px;
+}
+
+.post-info .comment-section .comments,.others-posts .comment-section .comments{
+  max-height: 100px;
+  overflow: scroll;
+  margin-bottom: 10px;
+}
+
+.post-info .comment-section .comments .each-comment,.others-posts .comment-section .comments .each-comment{
+  border-bottom:1px solid rgba(255, 255, 255, 0.1) ;
+  text-align: left;
+  width: 550px;
+  padding: 5px 0;
+}
+
+ .comment-section .comments .each-comment::before, .comment-section .comments .each-comment::after{
+  content: '"';
+  padding: 20px;
+}
+.comment-section-form{
+  display: flex;
+  flex-direction: row;
+  padding: 20px 0 0 0;
+  align-items: flex-end;
+  width: 620px;
+}
+.comment-section-form > input[type="text"]{
+  background:none;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  border:none;
+  width: 100%;
+  border-bottom: 1px solid  rgba(255, 255, 255, 0.1);
+  padding:10px 10px ;
+    margin-right: 10px;
+}
+
+.comment-section-form > input[type="text"]:focus{
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  border:none;
+  width: 100%;
+  border-bottom: 1px solid  rgba(255, 255, 255, 0.1);
+  padding:10px 10px ;
+}
+
+.comment-section-form > input[type="submit"]{
+  background: url("https://img.icons8.com/material-outlined/24/ffffff/comments.png");
+  border:none;
+  color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.comment-section-form > input[type="submit"]:hover{
+  border: 1px solid white;
+  width: 28px;
+  height: 28px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .songImg{
   width: 150px;
 }
@@ -986,13 +1054,13 @@ textarea::placeholder{
 }
 
 .like-section{
-  margin-top: 10px;
   position: absolute;
   right: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
   left: 100%;
+  bottom: 0;
 }
 
 .others-page .like-section{
