@@ -1,33 +1,24 @@
-# Final Project for Dynamic Web
+# Music Journal
 
-_name of the app hasn't been decided yet._
+### Project Description
 
-### Project Idea
+We share musics a lot on social media platforms like Instagram stories, to record the songs we like or to document our feelings at that moment.
 
-Music Journal
+I want to create a social media for people to share the music they like, comment on songs they like, record their days and lives via music, like writing a journal using music rather than words.
 
-A web app that creates a community where people could listen to music, share the music they like and comment on songs they like.
+### Features
 
-### Project Requirements
+* uses Firebase to store all the data and for user authentification
+* Users can
+	* Signup/Login/Logout
+	* Search for a song and make a post
+	* View, comment and like other peoples' posts
+	* Upload profile image and change username
+	* Visit other peoples' account home page
+* Backend API I wrote for this project:
+	* [https://github.com/sm7515/music-journal-node-api](https://github.com/sm7515/music-journal-node-api)
 
-* The goal of this project is to make a social media site.
-* Creating an API
-* Get and Post data through the API
-* Creating users and authentication
+### Link:
 
-#### Pages I might need
-
-1. Register
-2. Log in
-3. User Profile 
-    * user data: username, email, etc.
-4. Create Posts
-    * data
-        - songs
-        - comments
-5. Dashboard/Feed Page
-    * songs other people shared
-
-#### User Stories
-* as a user, I want to post a musical journal 
-    * search a song, add my comments and thoughts
+[https://musicjournal.herokuapp.com/](https://musicjournal.herokuapp.com/)
+_feel free to create an account and play with it!_
