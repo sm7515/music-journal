@@ -24,3 +24,6 @@ I want to create a social media for people to share the music they like, comment
 [https://musicjournal.herokuapp.com/](https://musicjournal.herokuapp.com/)
 
 _feel free to create an account and play with it!_
+
+### Demo:
+![demo](demo.gif)
